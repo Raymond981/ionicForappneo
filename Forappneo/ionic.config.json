@@ -1,0 +1,7 @@
+{
+  "name": "Forappneo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
