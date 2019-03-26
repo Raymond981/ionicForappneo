@@ -1,14 +1,32 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-title>
-      Ionic Blank
+      Forappneo
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+
+    <form [formGroup]="credenciales">
+      <ion-item>
+        <ion-label color="dark">Usuario:</ion-label>
+        <ion-input type="text" formControlName="username" placeholder="Inserte su usuario."></ion-input>
+        <span *ngIf="credenciales.get('username').touched && credenciales.get('username').hasError('required')">Requerido</span>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label color="dark">Contraseña:</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="Inserte su contraseña."></ion-input>
+        <span *ngIf="credenciales.get('password').touched && credenciales.get('password').hasError('required')">Requerido</span>
+      </ion-item>
+
+      <br>
+      <ion-button [disabled]="credenciales.invalid" (click)="login()" color="success" expand="block"><ion-icon name="walk"></ion-icon>&nbsp;Entrar</ion-button>
+      <br>
+      <ion-button (click)="register()" color="primary" expand="block"><ion-icon name="person-add"></ion-icon>&nbsp;Crear Cuenta</ion-button>
+    </form>
+
   </div>
 </ion-content>
