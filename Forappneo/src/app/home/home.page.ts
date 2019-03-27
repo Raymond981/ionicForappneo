@@ -4,6 +4,7 @@ import { ApiService } from '../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomePage implements OnInit{
     private API: ApiService,
     private formBuilder: FormBuilder,
     public loadingController: LoadingController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private router: Router
   ){}
 
   ngOnInit(){
@@ -69,5 +71,9 @@ export class HomePage implements OnInit{
       closeButtonText: 'Cerrar'
     });
     toast.present();
+  }
+
+  register(){
+    this.router.navigateByUrl('/registro');
   }
 }

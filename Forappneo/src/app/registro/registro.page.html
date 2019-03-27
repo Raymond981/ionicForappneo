@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>Forappneo - Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding color="light">
+  <form [formGroup]="registrarFrom">
+
+    <ion-item>
+      <ion-label color="dark">Nombre:</ion-label>
+      <ion-input type="text" formControlName="name" placeholder="Inserte su nombre."></ion-input>
+      <span *ngIf="registrarFrom.get('name').touched && registrarFrom.get('name').hasError('required')">Requerido</span>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label color="dark">Usuario:</ion-label>
+      <ion-input type="text" formControlName="username" placeholder="Inserte su usuario."></ion-input>
+      <span *ngIf="registrarFrom.get('username').touched && registrarFrom.get('username').hasError('required')">Requerido</span>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label color="dark">Email:</ion-label>
+      <ion-input type="email" formControlName="email" placeholder="Inserte su email."></ion-input>
+      <span *ngIf="registrarFrom.get('email').touched && registrarFrom.get('email').hasError('required')">Requerido</span>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label color="dark">Contraseña:</ion-label>
+      <ion-input type="password" formControlName="password1" placeholder="Inserte su contraseña."></ion-input>
+      <span *ngIf="registrarFrom.get('password1').touched && registrarFrom.get('password1').hasError('required')">Requerido</span>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label color="dark">Contraseña:</ion-label>
+      <ion-input type="password" formControlName="password2" placeholder="Inserte su contraseña."></ion-input>
+      <span *ngIf="registrarFrom.get('password2').touched && registrarFrom.get('password2').hasError('required')">Requerido</span>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label>Tipo de Usuario</ion-label>
+      <ion-select placeholder="Selecciona tipo de usuario." formControlName="type_user">
+        <ion-select-option value="1">Foraneo</ion-select-option>
+        <ion-select-option value="2">Arrendador</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+
+    <br>
+    <ion-button (click)="registrar()" [disabled]="registrarFrom.invalid" expand="block" color="success"><ion-icon name="send"></ion-icon>&nbsp; Crear Cuenta</ion-button>
+    <ion-button (click)="regresar()" expand="block" color="danger"><ion-icon name="undo"></ion-icon>&nbsp;Cancelar</ion-button>
+
+  </form>
+</ion-content>
