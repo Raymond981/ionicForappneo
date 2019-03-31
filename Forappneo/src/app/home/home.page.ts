@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit{
   credenciales : FormGroup;
+  subscription: Subscription;
   constructor(
     private http: HttpClient,
     private API: ApiService,
@@ -27,6 +29,10 @@ export class HomePage implements OnInit{
       'username': ['', Validators.required],
       'password': ['', Validators.required]
     });
+
+    if(localStorage.getItem('token')){
+      this.router.navigateByUrl("/inicio")
+    }
   }
 
   async login(){
@@ -36,8 +42,11 @@ export class HomePage implements OnInit{
       duration: 1500
     });
 
-    this.API.login(this.credenciales.value).subscribe(response =>{
-      console.log(response);
+    this.subscription = this.API.login(this.credenciales.value).subscribe(response =>{
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('userId', response.user_id);
+      localStorage.setItem('email', response.email);
+      this.router.navigateByUrl("/inicio");
     }, error=>{
       console.log(error)
       this.ToastErrorCredenciales();
@@ -50,7 +59,7 @@ export class HomePage implements OnInit{
 
     const { role, data } = await loading.onDidDismiss();
 
-    console.log('Loading dismissed!');
+    console.log('Loading dismissed!'); 
   }
 
   async ToastErrorCredenciales() {

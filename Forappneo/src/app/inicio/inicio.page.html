@@ -1,9 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>inicio</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
+  <ion-header>
+    <ion-toolbar color="warning">
+      <ion-title>Forappneo - Inicio</ion-title>
+      <ion-buttons slot="secondary">
+        <ion-button (click)="perfil()"><ion-icon name="browsers"></ion-icon></ion-button>
+        <ion-button (click)="salir()"><ion-icon name="exit"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content padding color="light">
+
+  <ion-card>
+    <ion-card-title text-center>
+      Busqueda de cuartos
+    </ion-card-title>
+
+    <ion-card-content>
+        <ion-item *ngFor="let dato of data">
+            <ion-label>{{dato.nombre}}</ion-label>
+            <ion-checkbox [(ngModel)]="dato.seleccionado"></ion-checkbox>
+        </ion-item>
+        
+        <ion-button (click)="buscar()" expand="block" color="success">Buscar</ion-button>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card *ngFor="let room of cuartos">
+    <ion-card-header>
+      <ion-toolbar color="light">
+        <h4 [routerLink]="'/cuartos-detalles/'+room.casa+'/'+room.id">Cuarto con costo de</h4>
+          <ion-buttons slot="primary">
+              <span style="right: 0px; color: #2f8ce2">${{room.mensualidad}}</span>
+              <ion-button color="secondary">
+                <ion-icon slot="icon-only" name="more"></ion-icon>
+              </ion-button>
+          </ion-buttons>
+      </ion-toolbar>
+    </ion-card-header>
+    <ion-card-content>
+      {{room.descripcion}}
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

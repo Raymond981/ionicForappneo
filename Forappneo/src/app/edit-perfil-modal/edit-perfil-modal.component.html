@@ -1,0 +1,13 @@
+
+<ion-content color="light">
+    <form [formGroup]="formEdit">
+        <ion-item>
+          <ion-label>Nombre:</ion-label>
+          <ion-input type="text" formControlName="name" placeholder="" [ngModel]="arreglo.name"></ion-input>
+          <span *ngIf="formEdit.get('name').touched && formEdit.get('name').hasError('required')">Requerido</span>
+        </ion-item>
+
+        <br>
+        <ion-button (click)="finalizarEdit()" expand="block" color="success">Guardar</ion-button>
+      </form>
+</ion-content>

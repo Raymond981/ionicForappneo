@@ -49,13 +49,18 @@ export class RegistroPage implements OnInit {
         let paramsProfile = {
           name: this.registrarFrom.get('name').value,
           type_user: this.registrarFrom.get('type_user').value,
+          imagen: "https://image.flaticon.com/icons/png/512/163/163815.png",
           user: userId,
         }
 
         this.api.registerProfile(paramsProfile, token).subscribe(response =>{
           console.log(response);
           if( response ){
+            localStorage.setItem('token', token)
+            localStorage.setItem('userId', userId)
+            localStorage.setItem('email', this.registrarFrom.get('email').value);
             console.log("Se registro correctamente")
+            this.router.navigateByUrl("/inicio");
           }
         })
       })

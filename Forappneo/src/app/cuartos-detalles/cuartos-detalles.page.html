@@ -1,0 +1,72 @@
+
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>Detalles del Cuarto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-title text-center padding>
+      Cuarto
+    </ion-card-title>
+
+    <ion-card-content>
+
+
+      <h2 text-center>Descripción</h2>
+ 
+      <span padding>{{cuarto.descripcion}}</span>
+
+
+
+      <h2 text-center color="dark">Servicios</h2>
+      <h4 *ngFor="let serv of servicio" >
+        <span *ngIf="serv.valor == 1" padding >
+          {{serv.nombre}}
+        </span></h4>
+      
+      <ion-item>
+        <h4>Capacidad de personas: {{cuarto.tamano}}</h4>
+      </ion-item>
+
+      <ion-item>
+          <h4>Fecha de publicación: {{cuarto.fecha}}</h4>
+      </ion-item>      
+
+      <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng">
+              <agm-info-window>
+                  <strong *ngFor="let h of casa">{{h.direccion}}</strong>
+                </agm-info-window>
+          </agm-marker>
+      </agm-map>
+
+    </ion-card-content>
+
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-title text-center padding>
+      Comentarios
+    </ion-card-title>
+
+    <ion-card-content>
+      <form [formGroup]="comentarios">
+          <ion-item>
+              <ion-input type="text" formControlName="comentario" placeholder=""></ion-input>
+          </ion-item>
+            <ion-button (click)="comentar()" color="primary" class="alignright">Comentar</ion-button>
+      </form>
+      <br><br>
+      <h2 text-center>Comentarios</h2>
+      <ion-item *ngFor="let coments of comentariosList">
+        {{coments.comentario}}
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
